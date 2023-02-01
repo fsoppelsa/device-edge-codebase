@@ -1,0 +1,14 @@
+---
+
+- name: template out kickstart file
+  hosts:
+    - all
+  become: true
+  tasks:
+    - name: push templated kickstart file
+      ansible.builtin.template:
+        src: templates/student{{ student_number }}.ks.j2
+        dest: "/var/www/html/student{{ student_number }}-kickstart.ks"
+        owner: apache
+        group: apache
+        mode: '0755'
